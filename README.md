@@ -23,7 +23,7 @@ Add to qb-target/init.lua at Config.TargetModels
 ```
     ["mesa_craft"] = {
         models = {
-            "prop_tool_bench02",
+            "prop_tool_bench02_ld",
         },
         options = {
             {
