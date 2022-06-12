@@ -1,7 +1,7 @@
 # mt-crafting
 Simple crafting system full configurable for QBCore
 
-# Privew:
+# Preview:
 https://youtu.be/bo649JeniE4
 
 # To emplement at future:
