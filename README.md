@@ -1,5 +1,6 @@
 # mt-crafting
 Simple crafting system full configurable for QBCore
+TIS IS A WIP SO IF SOMETHING IS NOT WORKING GOOD GIVE FEEDBACK AT MY DISCORD! :)
 
 # Preview:
 https://youtu.be/bo649JeniE4
