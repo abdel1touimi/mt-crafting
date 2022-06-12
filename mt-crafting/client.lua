@@ -69,7 +69,7 @@ RegisterNetEvent('mt-crafting:client:SpawnarMesa', function()
     local forward   = GetEntityForwardVector(playerPed)
     local x, y, z   = table.unpack(coords + forward * 1.0)
 
-    local model = `prop_tool_bench02`
+    local model = `prop_tool_bench02_ld`
     RequestModel(model)
     while (not HasModelLoaded(model)) do
         Wait(1)
