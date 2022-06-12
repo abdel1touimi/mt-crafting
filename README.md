@@ -9,6 +9,7 @@ https://youtu.be/bo649JeniE4
 - option to use job or gang
 - option to add locations at config
 - new props
+- add logs option
 
 # Installation:
 Add to qb-core/shared/item.lua
