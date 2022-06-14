@@ -7,6 +7,12 @@ QBCore.Functions.CreateUseableItem("mesa_craft", function(source, item)
     end
 end)
 
+RegisterNetEvent('mt-crafting:server:AddPontos', function(pontos)
+    local Player = QBCore.Functions.GetPlayer(source)
+    
+    Player.Functions.SetMetaData("craftinglevel", Player.PlayerData.metadata["craftinglevel"]+(pontos))
+end)
+
 QBCore.Functions.CreateCallback('mt-crafting:server:ItemsSuficientes', function(source, cb, items)
     local src = source
     local hasItems = false

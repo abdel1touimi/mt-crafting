@@ -28,24 +28,30 @@ RegisterNetEvent('mt-crafting:client:AbrirMenuCraft', function()
 end)
 
 local function CraftItems(item)
-    QBCore.Functions.Progressbar('crafting', 'CRAFTING '..Config.Main[item].label, 5000, false, false, {
-        disableMovement = true,
-        disableCarMovement = true,
-        disableMouse = false,
-        disableCombat = true,
-    }, {
-        animDict = "mini@repair",
-        anim = "fixing_a_ped",
-        }, {}, {}, function()
-        QBCore.Functions.Notify("Crafted "..Config.Main[item].label, 'success')
-        TriggerServerEvent('QBCore:Server:AddItem', Config.Main[item].itemName, 1)
-        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[Config.Main[item].itemName], "add")
-        for k, v in pairs(Config.Main[item].items) do
-            TriggerServerEvent('QBCore:Server:RemoveItem', v.item, v.amount)
-            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[v.item], "remove")
-        end
-        ClearPedTasks(PlayerPedId())
-    end)
+    local pontos = Config.Main[item].points
+    if QBCore.Functions.GetPlayerData().metadata["craftinglevel"] >= Config.Main[item].level then
+        QBCore.Functions.Progressbar('crafting', 'CRAFTING '..Config.Main[item].label, 5000, false, false, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = "mini@repair",
+            anim = "fixing_a_ped",
+            }, {}, {}, function()
+            QBCore.Functions.Notify("Crafted "..Config.Main[item].label, 'success')
+            TriggerServerEvent('QBCore:Server:AddItem', Config.Main[item].itemName, 1)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[Config.Main[item].itemName], "add")
+            for k, v in pairs(Config.Main[item].items) do
+                TriggerServerEvent('mt-crafting:server:AddPontos', pontos)
+                TriggerServerEvent('QBCore:Server:RemoveItem', v.item, v.amount)
+                TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[v.item], "remove")
+            end
+            ClearPedTasks(PlayerPedId())
+        end)
+    else
+        QBCore.Functions.Notify('You dont have requeried level to craft this item!', 'error', 7500)
+    end
 end
 
 RegisterNetEvent('mt-crafting:client:CraftItems', function(data)

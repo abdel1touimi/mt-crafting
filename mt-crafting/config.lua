@@ -1,9 +1,11 @@
 Config = {
     ["Main"] = {
-        ["weapon_pistol_mk2"] = {
-            itemName = "weapon_pistol_mk2",
-            label = "PISTOL MK2",
-            items = {
+        ["weapon_pistol_mk2"] = { -- item name
+            itemName = "weapon_pistol_mk2", -- item name
+            label = "PISTOL MK2", -- item label
+            level = 10, -- amount of level requeried
+            points = 5, -- how many points you win in 1 craft
+            items = { -- requeried items
                 [1] = {
                     item = "iron",
                     amount = 1,
@@ -22,10 +24,12 @@ Config = {
                 },
             }
         },
-        ["handcuffs"] = {
-            itemName = "handcuffs",
-            label = "HANDCUFFS",
-            items = {
+        ["handcuffs"] = { -- item name
+            itemName = "handcuffs", -- item name
+            label = "HANDCUFFS", -- item label
+            level = 0, -- amount of level requeried
+            points = 1, -- how many points you win in 1 craft
+            items = { -- requeried items
                 [1] = {
                     item = "iron",
                     amount = 1,
