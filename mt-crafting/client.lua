@@ -98,3 +98,22 @@ RegisterNetEvent('mt-crafting:client:EliminarMesa', function()
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['mesa_craft'], "add")
     end
 end)
+
+CreateThread(function()
+    if Config.UseLocation == true then
+        exports['qb-target']:AddBoxZone("MainCraft", Config.MainLocation, 1, 1, {
+            name="MainCraft",
+            heading=0,
+            debugpoly = false,
+        }, {
+            options = {
+                {
+                    event = "mt-crafting:client:AbrirMenuCraft",
+                    icon = "fas fa-table",
+                    label = "Craft",
+                },
+            },
+            distance = 1.5
+        })
+    end
+end)
