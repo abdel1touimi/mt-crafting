@@ -10,6 +10,7 @@ https://youtu.be/bo649JeniE4
 - option to add locations at config
 - new props
 - add logs option
+- add a minigame and if fail minigame it takes you points
 
 # Installation:
 Add to qb-core/server/player.lua
