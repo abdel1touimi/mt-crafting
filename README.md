@@ -6,7 +6,7 @@ Simple crafting system full configurable for QBCore
 https://youtu.be/bo649JeniE4
 
 # To emplement at future:
-- level system with data base
+- level system
 - option to use job or gang
 - option to add locations at config
 - new props
