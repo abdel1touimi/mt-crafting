@@ -13,6 +13,12 @@ RegisterNetEvent('mt-crafting:server:AddPontos', function(pontos)
     Player.Functions.SetMetaData("craftinglevel", Player.PlayerData.metadata["craftinglevel"]+(pontos))
 end)
 
+RegisterNetEvent('mt-crafting:server:AddPontos', function(pontosPerdidos)
+    local Player = QBCore.Functions.GetPlayer(source)
+    
+    Player.Functions.SetMetaData("craftinglevel", Player.PlayerData.metadata["craftinglevel"]-(pontosPerdidos))
+end)
+
 QBCore.Functions.CreateCallback('mt-crafting:server:ItemsSuficientes', function(source, cb, items)
     local src = source
     local hasItems = false

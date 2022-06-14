@@ -5,6 +5,8 @@ Config = {
             label = "PISTOL MK2", -- item label
             level = 10, -- amount of level requeried
             points = 5, -- how many points you win in 1 craft
+            lostpoints = 1, -- how many points you lost if fail the craft
+            chance = 70, -- chance to to success craft
             items = { -- requeried items
                 [1] = {
                     item = "iron",
@@ -29,6 +31,8 @@ Config = {
             label = "HANDCUFFS", -- item label
             level = 0, -- amount of level requeried
             points = 1, -- how many points you win in 1 craft
+            lostpoints = 1, -- how many points you lost if fail the craft
+            chance = 70, -- chance to to success craft
             items = { -- requeried items
                 [1] = {
                     item = "iron",
@@ -51,6 +55,9 @@ Config = {
     },
     ['MainLocation'] = {
         ['UseLocation'] = true,
-        ['Location'] = vector3(1189.55, 2641.58, 38.4)
-    }
+        ['Location'] = vector3(1189.55, 2641.58, 38.4),
+    },
+    ['Logs'] = {
+        ['UseLogs'] = true,
+    },
 }
