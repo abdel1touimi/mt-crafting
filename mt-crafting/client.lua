@@ -24,7 +24,7 @@ end)
 RegisterNetEvent('mt-crafting:client:AbrirMenuCraft', function()
     local columns = {
         {
-            header = "Crafting Menu",
+            header = Lang.menuHeader,
             isMenuHeader = true,
         },
     }
@@ -54,7 +54,7 @@ local function CraftItems(item)
     local pontos = Config.Main[item].points
     local prob = math.random(1, 100)
     if QBCore.Functions.GetPlayerData().metadata["craftinglevel"] >= Config.Main[item].level then
-        QBCore.Functions.Progressbar('crafting', 'CRAFTING '..Config.Main[item].label, 5000, false, false, {
+        QBCore.Functions.Progressbar('crafting', Lang.crafting .. Config.Main[item].label, 5000, false, false, {
             disableMovement = true,
             disableCarMovement = true,
             disableMouse = false,
@@ -67,9 +67,9 @@ local function CraftItems(item)
                 if prob <= Config.Main[item].chance then
                     if Config.Logs['UseLogs'] == true then
                         TriggerServerEvent('qb-log:server:CreateLog', 'crafting', 'Item Crafted', 'green', string.format(playername.. ' id ' ..playerid.. ' was crafted 1 ' ..Config.Main[item].label.. ' and earn '..pontos.. ' points', true))
-                        QBCore.Functions.Notify("Crafted "..Config.Main[item].label, 'success')
+                        QBCore.Functions.Notify(Lang.craftSuccess .. Config.Main[item].label, 'success')
                     else
-                        QBCore.Functions.Notify("Crafted "..Config.Main[item].label, 'success')
+                        QBCore.Functions.Notify(Lang.craftSuccess .. Config.Main[item].label, 'success')
                     end
                 TriggerServerEvent('QBCore:Server:AddItem', Config.Main[item].itemName, 1)
                 TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[Config.Main[item].itemName], "add")
@@ -80,10 +80,10 @@ local function CraftItems(item)
                 end
             elseif QBCore.Functions.GetPlayerData().metadata["craftinglevel"] >= Config.Main[item].lostpoints then
                 local pontosPerdidos = Config.Main[item].lostpoints
-                QBCore.Functions.Notify('You failed the craft and lost '..Config.Main[item].lostpoints.. ' points...', 'error', 7500)
+                QBCore.Functions.Notify(Lang.craftFailed1 .. Config.Main[item].lostpoints .. Lang.points, 'error', 7500)
                 TriggerServerEvent('mt-crafting:server:TirarPontos', pontosPerdidos)
             else
-                QBCore.Functions.Notify('You failed the craft...', 'error', 7500)
+                QBCore.Functions.Notify(Lang.craftFailed2, 'error', 7500)
             end
         end)
     else
@@ -96,7 +96,7 @@ RegisterNetEvent('mt-crafting:client:CraftItems', function(data)
         if (hasItems) then
             CraftItems(data.type)
         else
-            QBCore.Functions.Notify("You do not have the right items", "error")
+            QBCore.Functions.Notify(Lang.errorRightItems, "error")
             return
         end
     end, Config.Main[data.type].items)
@@ -147,7 +147,7 @@ CreateThread(function()
                 {
                     event = "mt-crafting:client:AbrirMenuCraft",
                     icon = "fas fa-table",
-                    label = "Craft",
+                    label = Lang.targetLabel,
                 },
             },
             distance = 1.5
@@ -158,5 +158,5 @@ end)
 RegisterCommand('craftpoints', function()
     local pontos = QBCore.Functions.GetPlayerData().metadata["craftinglevel"]
 
-    QBCore.Functions.Notify('You have ' ..pontos.. ' points!', 'primary', 7500)
+    QBCore.Functions.Notify(Lang.pointsCommand1 ..pontos.. Lang.pointsCommand2, 'primary', 7500)
 end)
