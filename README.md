@@ -7,11 +7,13 @@ https://youtu.be/bo649JeniE4 [OUTDATED]
 
 # To emplement at future:
 - option to use job or gang
-- new props
-- add logs option
-- add a minigame and if fail minigame it takes you points
 
 # Installation:
+Add to qb-smallresources/server/logs.lua
+```
+    ['crafting'] = '',
+```
+
 Add to qb-core/server/player.lua
 ```
     PlayerData.metadata['craftinglevel'] = PlayerData.metadata['craftinglevel'] or 0

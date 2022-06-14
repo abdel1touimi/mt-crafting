@@ -1,4 +1,25 @@
 local QBCore = exports['qb-core']:GetCoreObject()
+local PlayerData = {}
+
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+end)
+
+RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+    PlayerData = {}
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate', function(JobInfo)
+    PlayerData.job = JobInfo
+end)
+
+RegisterNetEvent('QBCore:Client:OnGangUpdate', function(GangInfo)
+    PlayerData.gang = GangInfo
+end)
+
+RegisterNetEvent('QBCore:Player:SetPlayerData', function(val)
+    PlayerData = val
+end)
 
 RegisterNetEvent('mt-crafting:client:AbrirMenuCraft', function()
     local columns = {
@@ -28,7 +49,10 @@ RegisterNetEvent('mt-crafting:client:AbrirMenuCraft', function()
 end)
 
 local function CraftItems(item)
+    local playername = GetPlayerName(PlayerId())
+    local playerid = GetPlayerServerId(PlayerId())
     local pontos = Config.Main[item].points
+    local prob = math.random(1, 100)
     if QBCore.Functions.GetPlayerData().metadata["craftinglevel"] >= Config.Main[item].level then
         QBCore.Functions.Progressbar('crafting', 'CRAFTING '..Config.Main[item].label, 5000, false, false, {
             disableMovement = true,
@@ -39,15 +63,28 @@ local function CraftItems(item)
             animDict = "mini@repair",
             anim = "fixing_a_ped",
             }, {}, {}, function()
-            QBCore.Functions.Notify("Crafted "..Config.Main[item].label, 'success')
-            TriggerServerEvent('QBCore:Server:AddItem', Config.Main[item].itemName, 1)
-            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[Config.Main[item].itemName], "add")
-            for k, v in pairs(Config.Main[item].items) do
-                TriggerServerEvent('mt-crafting:server:AddPontos', pontos)
-                TriggerServerEvent('QBCore:Server:RemoveItem', v.item, v.amount)
-                TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[v.item], "remove")
+                ClearPedTasks(PlayerPedId())
+                if prob <= Config.Main[item].chance then
+                    if Config.Logs['UseLogs'] == true then
+                        TriggerServerEvent('qb-log:server:CreateLog', 'crafting', 'Item Crafted', 'green', string.format(playername.. ' id ' ..playerid.. ' was crafted 1 ' ..Config.Main[item].label.. ' and earn '..pontos.. ' points', true))
+                        QBCore.Functions.Notify("Crafted "..Config.Main[item].label, 'success')
+                    else
+                        QBCore.Functions.Notify("Crafted "..Config.Main[item].label, 'success')
+                    end
+                TriggerServerEvent('QBCore:Server:AddItem', Config.Main[item].itemName, 1)
+                TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[Config.Main[item].itemName], "add")
+                for k, v in pairs(Config.Main[item].items) do
+                    TriggerServerEvent('mt-crafting:server:AddPontos', pontos)
+                    TriggerServerEvent('QBCore:Server:RemoveItem', v.item, v.amount)
+                    TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[v.item], "remove")
+                end
+            elseif QBCore.Functions.GetPlayerData().metadata["craftinglevel"] >= Config.Main[item].lostpoints then
+                local pontosPerdidos = Config.Main[item].lostpoints
+                QBCore.Functions.Notify('You failed the craft and lost '..Config.Main[item].lostpoints.. ' points...', 'error', 7500)
+                TriggerServerEvent('mt-crafting:server:TirarPontos', pontosPerdidos)
+            else
+                QBCore.Functions.Notify('You failed the craft...', 'error', 7500)
             end
-            ClearPedTasks(PlayerPedId())
         end)
     else
         QBCore.Functions.Notify('You dont have requeried level to craft this item!', 'error', 7500)
@@ -116,4 +153,10 @@ CreateThread(function()
             distance = 1.5
         })
     end
+end)
+
+RegisterCommand('craftpoints', function()
+    local pontos = QBCore.Functions.GetPlayerData().metadata["craftinglevel"]
+
+    QBCore.Functions.Notify('You have ' ..pontos.. ' points!', 'primary', 7500)
 end)
