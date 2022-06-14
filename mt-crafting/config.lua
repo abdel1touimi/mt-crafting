@@ -61,3 +61,16 @@ Config = {
         ['UseLogs'] = true,
     },
 }
+
+Lang = {
+    ['craftSuccess'] = 'Crafted ',
+    ['craftFailed1'] = 'You failed the craft and lost ',
+    ['craftFailed2'] = 'You failed the craft...',
+    ['points'] = ' points...',
+    ['crafting'] = 'CRAFTING ',
+    ['menuHeader'] = 'Crafting Menu',
+    ['errorRightItems'] = 'You do not have the right items...',
+    ['targetLabel'] = 'Craft',
+    ['pointsCommand1'] = 'You have ',
+    ['pointsCommand2'] = ' points!',
+}
