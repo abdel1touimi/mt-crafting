@@ -50,3 +50,6 @@ Config = {
         },
     },
 }
+
+Config.UseLocation = true
+Config.MainLocation = vector3(1189.55, 2641.58, 38.4) -- Location of craft
