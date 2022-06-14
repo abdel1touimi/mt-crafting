@@ -100,8 +100,8 @@ RegisterNetEvent('mt-crafting:client:EliminarMesa', function()
 end)
 
 CreateThread(function()
-    if Config.UseLocation == true then
-        exports['qb-target']:AddBoxZone("MainCraft", Config.MainLocation, 1, 1, {
+    if Config.MainLocation['UseLocation'] == true then
+        exports['qb-target']:AddBoxZone("MainCraft", Config.MainLocation['Location'], 1, 1, {
             name="MainCraft",
             heading=0,
             debugpoly = false,
