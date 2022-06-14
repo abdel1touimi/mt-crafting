@@ -1,5 +1,5 @@
 # mt-crafting
-Simple crafting system full configurable for QBCore
+Simple crafting system full configurable for QBCore using level system
 - THIS IS A WIP SO IF SOMETHING IS NOT WORKING GOOD GIVE FEEDBACK AT MY DISCORD! :)
 
 # Preview:
