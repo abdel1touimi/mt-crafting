@@ -6,18 +6,22 @@ Simple crafting system full configurable for QBCore
 https://youtu.be/bo649JeniE4
 
 # To emplement at future:
-- level system
 - option to use job or gang
 - option to add locations at config
 - new props
 - add logs option
 
 # Installation:
+Add to qb-core/server/player.lua
+```
+    PlayerData.metadata['craftinglevel'] = PlayerData.metadata['craftinglevel'] or 0
+```
+
 Add to qb-core/shared/item.lua
 
 ```
 	-- mt-crafting 2.0
-	["mesa_craft"]  	= {["name"] = "mesa_craft", 			["label"] = "Crafting table", 								["weight"] = 100, 		["type"] = "item", 			["image"] = "mesa_craft.png", 				["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = ""},
+	["mesa_craft"]  	= {["name"] = "mesa_craft", 			["label"] = "Crafting table", 								["weight"] = 70000, 		["type"] = "item", 			["image"] = "mesa_craft.png", 				["unique"] = false, 	["useable"] = true, 	["shouldClose"] = true,    ["combinable"] = nil,   ["description"] = ""},
 
 ```
 
