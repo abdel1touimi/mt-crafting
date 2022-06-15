@@ -117,22 +117,44 @@ RegisterNetEvent('mt-crafting:client:SpawnarMesa', function()
     while (not HasModelLoaded(model)) do
         Wait(1)
     end
-    local obj = CreateObject(model, x, y, z, true, false, true)
-    PlaceObjectOnGroundProperly(obj)
-    SetEntityAsMissionEntity(obj)
+    QBCore.Functions.Progressbar('name_here', 'PLACING TABLE...', 1000, false, true, {
+        disableMovement = true,
+        disableCarMovement = true,
+        disableMouse = false,
+        disableCombat = true,
+    }, {
+        animDict = 'missfinale_c2ig_11',
+        anim = 'pushcar_offcliff_f',
+        flags = 16,
+    }, {}, {}, function()
+        local obj = CreateObject(model, x, y, z, true, false, true)
+        PlaceObjectOnGroundProperly(obj)
+        SetEntityAsMissionEntity(obj)
 
-    TriggerServerEvent('QBCore:Server:RemoveItem', 'mesa_craft', 1)
-    TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['mesa_craft'], "remove")
+        TriggerServerEvent('QBCore:Server:RemoveItem', 'mesa_craft', 1)
+        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['mesa_craft'], "remove")
+    end)
 end)
 
 RegisterNetEvent('mt-crafting:client:EliminarMesa', function()
     local coords = GetEntityCoords(PlayerPedId())
     local obj = QBCore.Functions.GetClosestObject(coords)
     if DoesEntityExist(obj) then
-        DeleteEntity(obj)
+        QBCore.Functions.Progressbar('name_here', 'TAKING TABLE...', 1000, false, true, {
+            disableMovement = true,
+            disableCarMovement = true,
+            disableMouse = false,
+            disableCombat = true,
+        }, {
+            animDict = 'missfinale_c2ig_11',
+            anim = 'pushcar_offcliff_f',
+            flags = 16,
+        }, {}, {}, function()
+            DeleteEntity(obj)
 
-        TriggerServerEvent('QBCore:Server:AddItem', 'mesa_craft', 1)
-        TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['mesa_craft'], "add")
+            TriggerServerEvent('QBCore:Server:AddItem', 'mesa_craft', 1)
+            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['mesa_craft'], "add")
+        end)
     end
 end)
 
