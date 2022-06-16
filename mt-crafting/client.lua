@@ -102,10 +102,6 @@ RegisterNetEvent('mt-crafting:client:CraftItems', function(data)
     end, Config.Main[data.type].items)
 end)
 
-RegisterCommand('craft', function()
-    TriggerEvent('mt-crafting:client:AbrirMenuCraft')
-end)
-
 RegisterNetEvent('mt-crafting:client:SpawnarMesa', function()
     local playerPed = PlayerPedId()
     local coords    = GetEntityCoords(playerPed)
