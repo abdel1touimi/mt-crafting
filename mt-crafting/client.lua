@@ -33,7 +33,7 @@ RegisterNetEvent('mt-crafting:client:AbrirMenuCraft', function()
         item.header = "<img src=nui://qb-inventory/html/images/"..QBCore.Shared.Items[v.itemName].image.." width=35px style='margin-right: 10px'> " .. v.label .. "<br> Required Points: " .. v.level
         local text = ""
         for k, v in pairs(v.items) do
-            text = text .. "• " .. v.item .. ": " .. v.amount .. "x <br>"
+            text = text .. "• " .. QBCore.Shared.Items[v.item].label .. ": " .. v.amount .. "x <br>"
         end
         item.text = text
         item.params = {
