@@ -46,6 +46,12 @@ Add to qb-target/init.lua at Config.TargetModels
                 event = "mt-crafting:client:EliminarMesa",
                 icon = "fas fa-table", 
                 label = "Delete Table",
+            },
+                        {
+                type = "client",
+                event = "mt-crafting:client:VerificarPontos",
+                icon = "fas fa-coins", 
+                label = "Check Points",
             }
         },
         distance = 2.5,

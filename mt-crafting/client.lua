@@ -30,7 +30,7 @@ RegisterNetEvent('mt-crafting:client:AbrirMenuCraft', function()
     }
     for k, v in pairs(Config.Main) do
         local item = {}
-        item.header = "<img src=nui://qb-inventory/html/images/"..QBCore.Shared.Items[v.itemName].image.." width=35px style='margin-right: 10px'> " .. v.label
+        item.header = "<img src=nui://qb-inventory/html/images/"..QBCore.Shared.Items[v.itemName].image.." width=35px style='margin-right: 10px'> " .. v.label .. "<br> Required Points: " .. v.level
         local text = ""
         for k, v in pairs(v.items) do
             text = text .. "• " .. v.item .. ": " .. v.amount .. "x <br>"
@@ -168,6 +168,11 @@ CreateThread(function()
                     icon = "fas fa-table",
                     label = Lang.targetLabel,
                 },
+                {
+                    event = "mt-crafting:client:VerificarPontos",
+                    icon = "fas fa-coins",
+                    label = Lang.targetPoints,
+                },
             },
             distance = 1.5
         })
@@ -175,6 +180,12 @@ CreateThread(function()
 end)
 
 RegisterCommand('craftpoints', function()
+    local pontos = QBCore.Functions.GetPlayerData().metadata["craftinglevel"]
+
+    QBCore.Functions.Notify(Lang.pointsCommand1 ..pontos.. Lang.pointsCommand2, 'primary', 7500)
+end)
+
+RegisterNetEvent('mt-crafting:client:VerificarPontos', function()
     local pontos = QBCore.Functions.GetPlayerData().metadata["craftinglevel"]
 
     QBCore.Functions.Notify(Lang.pointsCommand1 ..pontos.. Lang.pointsCommand2, 'primary', 7500)
