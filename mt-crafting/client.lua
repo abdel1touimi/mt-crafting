@@ -73,8 +73,8 @@ local function CraftItems(item)
                     end
                 TriggerServerEvent('QBCore:Server:AddItem', Config.Main[item].itemName, 1)
                 TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[Config.Main[item].itemName], "add")
+                TriggerServerEvent('mt-crafting:server:AddPontos', pontos)
                 for k, v in pairs(Config.Main[item].items) do
-                    TriggerServerEvent('mt-crafting:server:AddPontos', pontos)
                     TriggerServerEvent('QBCore:Server:RemoveItem', v.item, v.amount)
                     TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[v.item], "remove")
                 end
