@@ -7,6 +7,7 @@ https://youtu.be/bo649JeniE4 [OUTDATED]
 
 # To emplement at future:
 - option to use job or gang
+- Remove table item option and add locations to spawn tables at config.lua
 
 # Installation:
 Add to qb-smallresources/server/logs.lua
