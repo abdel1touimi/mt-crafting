@@ -73,4 +73,5 @@ Lang = {
     ['targetLabel'] = 'Craft',
     ['pointsCommand1'] = 'You have ',
     ['pointsCommand2'] = ' points!',
+    ['targetPoints'] = 'Check Points',
 }
