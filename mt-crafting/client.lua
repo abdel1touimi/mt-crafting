@@ -151,9 +151,6 @@ RegisterNetEvent('mt-crafting:client:EliminarMesa', function()
             flags = 16,
         }, {}, {}, function()
             DeleteEntity(obj)
-
-            TriggerServerEvent('QBCore:Server:AddItem', 'mesa_craft', 1)
-            TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['mesa_craft'], "add")
         end)
     end
 end)
