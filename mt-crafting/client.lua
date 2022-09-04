@@ -71,11 +71,11 @@ local function CraftItems(item)
                     else
                         QBCore.Functions.Notify(Lang.craftSuccess .. Config.Main[item].label, 'success')
                     end
-                TriggerServerEvent('mt-crafting:server:AddItem', Config.Main[item].itemName, 1)
+                TriggerServerEvent('QBCore:Server:AddItem', Config.Main[item].itemName, 1)
                 TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[Config.Main[item].itemName], "add")
                 TriggerServerEvent('mt-crafting:server:AddPontos', pontos)
                 for k, v in pairs(Config.Main[item].items) do
-                    TriggerServerEvent('mt-crafting:server:RemoveItem', v.item, v.amount)
+                    TriggerServerEvent('QBCore:Server:RemoveItem', v.item, v.amount)
                     TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items[v.item], "remove")
                 end
             elseif QBCore.Functions.GetPlayerData().metadata["craftinglevel"] >= Config.Main[item].lostpoints then
@@ -127,7 +127,7 @@ RegisterNetEvent('mt-crafting:client:SpawnarMesa', function()
         PlaceObjectOnGroundProperly(obj)
         SetEntityAsMissionEntity(obj)
 
-        TriggerServerEvent('mt-crafting:server:RemoveItem', 'mesa_craft', 1)
+        TriggerServerEvent('QBCore:Server:RemoveItem', 'mesa_craft', 1)
         TriggerEvent("inventory:client:ItemBox", QBCore.Shared.Items['mesa_craft'], "remove")
     end)
 end)
