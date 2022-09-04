@@ -132,9 +132,7 @@ RegisterNetEvent('mt-crafting:client:SpawnarMesa', function()
     end)
 end)
 
-RegisterNetEvent('mt-crafting:client:EliminarMesa', function()
-    local coords = GetEntityCoords(PlayerPedId())
-    local obj = QBCore.Functions.GetClosestObject(coords)
+RegisterNetEvent('mt-crafting:client:EliminarMesa', function(obj)
     if DoesEntityExist(obj) then
         QBCore.Functions.Progressbar('name_here', 'TAKING TABLE...', 1000, false, true, {
             disableMovement = true,

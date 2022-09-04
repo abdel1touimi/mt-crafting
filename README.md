@@ -43,7 +43,10 @@ Add to qb-target/init.lua at Config.TargetModels
             },
             {
                 type = "client",
-                event = "mt-crafting:client:EliminarMesa",
+                action = function(entity) -- This is the action it has to perform, this REPLACES the event and this is OPTIONAL
+                    if IsPedAPlayer(entity) then return false end -- This will return false if the entity interacted with is a player and otherwise returns true
+                    TriggerEvent('mt-crafting:client:EliminarMesa', entity) -- Triggers
+                end,
                 icon = "fas fa-table", 
                 label = "Delete Table",
             },
